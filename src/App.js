@@ -1,7 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { Row, Spinner } from "react-bootstrap";
 import News from "./components/News/News";
 
 function App() {
@@ -15,11 +15,15 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <Row xs={1} md={3} className="g-4">
-        {news.map((nw) => (
-          <News news={nw}></News>
-        ))}
-      </Row>
+      {news.length === 0 ? (
+        <Spinner animation="border" />
+      ) : (
+        <Row xs={1} md={3} className="g-4">
+          {news.map((nw) => (
+            <News news={nw}></News>
+          ))}
+        </Row>
+      )}
     </div>
   );
 }
